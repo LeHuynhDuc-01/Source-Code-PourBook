@@ -1,0 +1,91 @@
+﻿@model IEnumerable<QL_WebsiteBanSach.Models.tbl_TacGia>
+
+@{
+	ViewBag.Title = "Quản Lý Tác Giả";
+	Layout = "~/Views/Shared/Admin_Layout_Page.cshtml";
+}
+
+<div class="pagetitle">
+	<h1>Quản Lý Tác Giả</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="@Url.Action("Admin", "Admin")">Admin</a></li>
+			<li class="breadcrumb-item">Danh Mục</li>
+			<li class="breadcrumb-item active">Quản Lý Tác Giả</li>
+		</ol>
+	</nav>
+</div>
+
+@*===================== From Sản phẩm =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					@using (Html.BeginForm("Change_Authors", "Admin"))
+					{
+						<h5 class="card-title">Thông tin tác giả</h5>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Mã Tác Giả" name="MaTacGia">
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Tên Tác Giả" name="TenTacGia">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="textarea" class="col-sm-2 col-form-label">Mô Tả</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" id="textarea" style="height: 100px" name="MoTa"></textarea>
+							</div>
+						</div>
+						<div class="row mb-3">
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label"></label>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@*===================== Datatable =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Bảng Dữ Liệu Tác Giả</h5>
+					<table class="table datatable">
+						<thead>
+							<tr>
+								<th>Mã Tác Giả</th>
+								<th>Tên Tác Giả</th>
+								<th>Mô Tả</th>
+							</tr>
+						</thead>
+						<tbody>
+							@{
+								foreach (var item in Model)
+								{
+									<tr>
+										<td>@item.MaTacGia</td>
+										<td>@item.TenTacGia</td>
+										<td>@item.MoTa</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+

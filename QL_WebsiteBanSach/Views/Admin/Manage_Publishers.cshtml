@@ -1,0 +1,89 @@
+﻿@model IEnumerable<QL_WebsiteBanSach.Models.tbl_NhaXuatBan>
+
+@{
+	ViewBag.Title = "Quản Lý Nhà Xuất Bản";
+	Layout = "~/Views/Shared/Admin_Layout_Page.cshtml";
+}
+
+<div class="pagetitle">
+	<h1>Quản Lý Nhà Xuất Bản</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="@Url.Action("Admin", "Admin")">Admin</a></li>
+			<li class="breadcrumb-item">Danh Mục</li>
+			<li class="breadcrumb-item active">Quản Lý Nhà Xuất Bản</li>
+		</ol>
+	</nav>
+</div>
+
+@*===================== From Sản phẩm =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					@using (Html.BeginForm("Change_Publishers", "Admin"))
+					{
+						<h5 class="card-title">Thông tin nhà xuất bản</h5>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Mã Nhà Xuất Bản" name="MaNhaXuatBan">
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Tên Nhà Xuất Bản" name="TenNhaXuatBan">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="textarea" class="col-sm-2 col-form-label">Mô Tả</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" id="textarea" style="height: 100px" name="MoTa"></textarea>
+							</div>
+						</div>
+						<div class="row mb-3">
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label"></label>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@*===================== Datatable =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Bảng Dữ Liệu Nhà Xuất Bản</h5>
+					<table class="table datatable">
+						<thead>
+							<tr>
+								<th>Mã Nhà Xuất Bản</th>
+								<th>Tên Nhà Xuất Bản</th>
+								<th>Mô Tả</th>
+							</tr>
+						</thead>
+						<tbody>
+							@{
+								foreach (var item in Model)
+								{
+									<tr>
+										<td>@item.MaNhaXuatBan</td>
+										<td>@item.TenNhaXuatBan</td>
+										<td>@item.MoTa</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

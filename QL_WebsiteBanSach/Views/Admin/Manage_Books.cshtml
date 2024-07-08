@@ -1,0 +1,146 @@
+﻿@model IEnumerable<QL_WebsiteBanSach.Models.tbl_Sach>
+
+@{
+	ViewBag.Title = "Quản Lý Sách";
+	Layout = "~/Views/Shared/Admin_Layout_Page.cshtml";
+}
+
+<div class="pagetitle">
+	<h1>Quản Lý Sách</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="@Url.Action("Admin", "Admin")">Admin</a></li>
+			<li class="breadcrumb-item">Danh Mục</li>
+			<li class="breadcrumb-item active">Quản Lý Sách</li>
+		</ol>
+	</nav>
+</div>
+
+@*===================== From Sản phẩm =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					@using (Html.BeginForm("Change_Books", "Admin"))
+					{
+						<h5 class="card-title">Thông tin sách</h5>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Mã Sách" name="MaSach">
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Tên Sách" name="TenSach">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<input type="number" class="form-control" placeholder="Giá Bán" name="GiaBan">
+							</div>
+							<div class="col-md-6">
+								<select class="form-select" aria-label="Thể Loại" name="TheLoai">
+									<option selected>Thể Loại</option>
+									@{
+										foreach (var item in ViewBag.TheLoai)
+										{
+											<option value="@item.MaTheLoai">@item.TenTheLoai</option>
+										}
+									}
+								</select>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="formFile" class="col-sm-2 col-form-label">Ảnh Bìa</label>
+							<div class="col-sm-4">
+								<input class="form-control" type="file" id="formFile" name="AnhBia">
+							</div>
+						</div>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<select class="form-select" aria-label="Nhà Xuất Bản" name="NhaXuatBan">
+									<option selected>Nhà Xuất Bản</option>
+									@{
+										foreach (var item in ViewBag.NhaXuatBan)
+										{
+											<option value="@item.MaNhaXuatBan">@item.TenNhaXuatBan</option>
+										}
+									}
+								</select>
+							</div>
+							<div class="col-md-6">
+								<select class="form-select" aria-label="Tác Giả" name="TacGia">
+									<option selected>Tác Giả</option>
+									@{
+										foreach (var item in ViewBag.TacGia)
+										{
+											<option value="@item.MaTacGia">@item.TenTacGia</option>
+										}
+									}
+								</select>
+							</div>
+						</div>
+						<div class="row mb-3">
+							<label for="textarea" class="col-sm-2 col-form-label">Mô Tả</label>
+							<div class="col-sm-10">
+								<textarea class="form-control" id="textarea" style="height: 100px" name="MoTa"></textarea>
+							</div>
+						</div>
+						<div class="row mb-3">
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label"></label>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@*===================== Datatable =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Bảng Dữ Liệu Sách</h5>
+					<table class="table datatable">
+						<thead>
+							<tr>
+								<th>Mã Sách</th>
+								<th>Tên Sách</th>
+								<th>Ảnh Bìa</th>
+								<th>Mô Tả</th>
+								<th>Giá Bán</th>
+								<th>Tên Tác Giả</th>
+								<th>Tên Nhà Xuất bản</th>
+								<th>Thể Loại</th>
+							</tr>
+						</thead>
+						<tbody>
+							@{ 
+								foreach (var item in Model)
+								{
+									if (item.tbl_ChiTietSach == null || item.tbl_TacPham == null) { continue; }
+									<tr>
+										<td>@item.MaSach</td>
+										<td>@item.tbl_ChiTietSach.TenSach</td>
+										<td><img src="~/Images/@item.tbl_ChiTietSach.AnhBia" alt="@item.tbl_ChiTietSach.AnhBia" style="width: 50px" /></td>
+										<td>@item.tbl_ChiTietSach.MoTa</td>
+										<td>@item.tbl_ChiTietSach.GiaBan</td>
+										<td>@item.tbl_TacGia.TenTacGia</td>
+										<td>@item.tbl_NhaXuatBan.TenNhaXuatBan</td>
+										<td>@item.tbl_TacPham.FirstOrDefault().tbl_TheLoai.TenTheLoai</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

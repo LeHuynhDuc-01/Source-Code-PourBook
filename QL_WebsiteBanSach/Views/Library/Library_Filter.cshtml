@@ -1,0 +1,142 @@
+﻿@model IEnumerable<QL_WebsiteBanSach.Models.tbl_TheLoai>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<div class="col-lg-3 col-md-12">
+	<!-- Price Start -->
+	<div class="border-bottom mb-4 pb-4">
+		<h5 class="font-weight-semi-bold mb-4">Giá Sách</h5>
+		<form id="price">
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+				<input type="checkbox" class="custom-control-input" checked id="price-all">
+				<label class="custom-control-label" for="price-all">Mọi Giá</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+				<input type="checkbox" class="custom-control-input" id="price-1">
+				<label class="custom-control-label" for="price-1">0VND - 100.000VND</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+				<input type="checkbox" class="custom-control-input" id="price-2">
+				<label class="custom-control-label" for="price-2">100.000VND - 200.00VND</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+				<input type="checkbox" class="custom-control-input" id="price-3">
+				<label class="custom-control-label" for="price-3">200.000VND - 300.000VND</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+				<input type="checkbox" class="custom-control-input" id="price-4">
+				<label class="custom-control-label" for="price-4">300.000VND - 400.000VND</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
+				<input type="checkbox" class="custom-control-input" id="price-5">
+				<label class="custom-control-label" for="price-5">400.000VND - 500.000VND</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+		</form>
+	</div>
+	<!-- Price End -->
+	<!-- Catagories Start -->
+	<div class="border-bottom mb-4 pb-4">
+		<h5 class="font-weight-semi-bold mb-4">Thể Loại Sách</h5>
+		<form id="catagories">
+			<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+				<input type="checkbox" class="custom-control-input" checked id="catagories-all">
+				<label class="custom-control-label" for="catagories-all">Tất Cả Loại Sách</label>
+				<span class="badge border font-weight-normal"></span>
+			</div>
+			@{
+				foreach (var item in Model)
+				{
+					<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+						<input type="checkbox" class="custom-control-input" id="catagories-@item.MaTheLoai">
+						<label class="custom-control-label" for="catagories-@item.MaTheLoai">@item.TenTheLoai</label>
+						<span class="badge border font-weight-normal">@item.tbl_TacPham.Count()</span>
+					</div>
+				}
+			}
+		</form>
+	</div>
+	<!-- Catagories End -->
+</div>
+
+<script language="javascript">
+    $(document).ready(function () {
+        // Xử lý sự kiện checkbox
+        $("#catagories-all").change(function () {
+            if (this.checked) {
+                $("#catagories input[type='checkbox']").prop('checked', true);
+            } else {
+                $("#catagories input[type='checkbox']").prop('checked', false);
+            }
+		});
+
+        $("#price-all").change(function () {
+            if (this.checked) {
+                $("#price input[type='checkbox']").prop('checked', true);
+            } else {
+                $("#price input[type='checkbox']").prop('checked', false);
+            }
+		});
+
+		$("#catagories-all").trigger("change");
+		$("#price-all").trigger("change");
+
+        $("#catagories input[type='checkbox']").change(function () {
+            // Kiểm tra nếu có ít nhất một checkbox không được chọn
+            if ($("#catagories input[type='checkbox']:not(:checked)").length > 0) {
+                // Hủy chọn checkbox có id "catagories-all"
+                $("#catagories-all").prop("checked", false);
+            } else {
+                // Nếu tất cả các checkbox được chọn, chọn checkbox có id "catagories-all"
+                $("#catagories-all").prop("checked", true);
+            }
+		});
+
+        $("#price input[type='checkbox']").change(function () {
+            // Kiểm tra nếu có ít nhất một checkbox không được chọn
+            if ($("#price input[type='checkbox']:not(:checked)").length > 0) {
+                // Hủy chọn checkbox có id "catagories-all"
+                $("#price-all").prop("checked", false);
+            } else {
+                // Nếu tất cả các checkbox được chọn, chọn checkbox có id "catagories-all"
+                $("#price-all").prop("checked", true);
+            }
+        });
+
+        $("input[id^='catagories-']").change(function () {
+            // Tạo một mảng lưu trữ các thể loại được chọn
+            var selectedCategories = [];
+
+            // Lặp qua tất cả các checkbox trong nhóm
+            $("input[id^='catagories-']").each(function () {
+                if (this.checked) {
+                    // Nếu checkbox được chọn, thêm thể loại vào mảng
+                    var categoryId = $(this).attr("id").replace("catagories-", "");
+                    selectedCategories.push(categoryId);
+                }
+			});
+		});
+
+		$.ajax({
+                url: '@Url.Action("Catagorized_Books", "Library")',
+                type: 'POST',
+                traditional: true,
+                data: { idList: selectedCategories },
+                success: function (result) {
+                    // Xử lý kết quả nếu cần
+                    console.log(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    // Xử lý lỗi nếu có
+                    console.log(xhr.status);
+                    console.log(thrownError);
+                }
+         });
+	});
+</script>
+

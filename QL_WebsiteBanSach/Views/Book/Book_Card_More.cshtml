@@ -1,0 +1,19 @@
+﻿@model QL_WebsiteBanSach.Models.tbl_Sach
+
+<div class="col-lg-2 col-md-6 col-sm-12 pb-1">
+	<div class="card product-item border-0 mb-4">
+		<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+			<img class="img-fluid w-100" src="~/Images/@Model.tbl_ChiTietSach.AnhBia" alt="@Model.tbl_ChiTietSach.AnhBia" style="height:500px">
+		</div>
+		<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+			<h6 class="text-truncate mb-3">@Model.tbl_ChiTietSach.TenSach</h6>
+			<div class="d-flex justify-content-center">
+				<h6>@Model.tbl_ChiTietSach.GiaBan VNĐ</h6>
+			</div>
+		</div>
+		<div class="card-footer d-flex justify-content-between bg-light border">
+			<a href="@Url.Action("Book_Details", "Book", new { id = Model.MaSach })" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>Xem Thêm</a>
+			<a href="@Url.Action("Add_Cart", "Cart", new {id = Model.MaSach, url = Request.Url.ToString()})" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Mua Ngay</a>
+		</div>
+	</div>
+</div>

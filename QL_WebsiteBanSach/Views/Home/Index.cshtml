@@ -1,0 +1,40 @@
+﻿@{
+	ViewBag.Title = "Trang Chủ";
+	Layout = "~/Views/Shared/Main_Layout_Page.cshtml";
+}
+
+<!-- Featured Start -->
+@Html.Action("Website_Features", "Home")
+<!-- Featured End -->
+
+<!-- Categories Start -->
+@Html.Action("Featured_Catagories", "Home")
+<!-- Categories End -->
+
+<!-- Offer Start -->
+<!-- Offer End -->
+
+<!-- Products Start -->
+@Html.Action("Featured_Books", "Home")
+<!-- Products End -->
+
+<!-- Subscribe Start -->
+<div class="container-fluid bg-secondary my-5">
+	<div class="row justify-content-md-center py-5 px-xl-5">
+		<div class="col-md-6 col-12 py-5">
+			<div class="text-center mb-2 pb-2">
+				<h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Tham Gia Vào Ngôi Nhà Đọc Sách</span></h2>
+				<p>Hãy nhập email của bạn để tham gia vào cộng đồng POUR BOOKS và tận hưỡng được những quyển sách mới và hay nhất trên thế giới</p>
+			</div>
+			<form action="">
+				<div class="input-group">
+					<input type="text" class="form-control border-white p-4" placeholder="Email của Bạn">
+					<div class="input-group-append">
+						<button class="btn btn-primary px-4">Đăng Ký</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!-- Subscribe End -->

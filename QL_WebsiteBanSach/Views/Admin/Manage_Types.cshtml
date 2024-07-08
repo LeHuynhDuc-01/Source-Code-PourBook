@@ -1,0 +1,82 @@
+﻿@model IEnumerable<QL_WebsiteBanSach.Models.tbl_TheLoai>
+
+@{
+	ViewBag.Title = "Quản Lý Thể Loại";
+	Layout = "~/Views/Shared/Admin_Layout_Page.cshtml";
+}
+
+<div class="pagetitle">
+	<h1>Quản Lý Thể Loại</h1>
+	<nav>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a href="@Url.Action("Admin", "Admin")">Admin</a></li>
+			<li class="breadcrumb-item">Danh Mục</li>
+			<li class="breadcrumb-item active">Quản Lý Thể Loại</li>
+		</ol>
+	</nav>
+</div>
+
+@*===================== From Sản phẩm =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					@using (Html.BeginForm("Change_Types", "Admin"))
+					{
+						<h5 class="card-title">Thông tin thể loại</h5>
+						<div class="row mb-3">
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Mã Thể Loại" name="MaTheLoai">
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control" placeholder="Tên Thể Loại" name="TenTheLoai">
+							</div>
+						</div>
+						<div class="row mb-3">
+						</div>
+						<div class="row mb-3">
+							<label class="col-sm-2 col-form-label"></label>
+							<div class="col-sm-10">
+								<button type="submit" class="btn btn-primary">Lưu Thông Tin</button>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+@*===================== Datatable =====================*@
+<section class="section">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title">Bảng Dữ Liệu Thể Loại</h5>
+					<table class="table datatable">
+						<thead>
+							<tr>
+								<th>Mã Thể Loại</th>
+								<th>Tên Thể Loại</th>
+							</tr>
+						</thead>
+						<tbody>
+							@{
+								foreach (var item in Model)
+								{
+									<tr>
+										<td>@item.MaTheLoai</td>
+										<td>@item.TenTheLoai</td>
+									</tr>
+								}
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+

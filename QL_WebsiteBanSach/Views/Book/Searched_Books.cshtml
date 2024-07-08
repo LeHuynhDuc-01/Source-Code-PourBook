@@ -1,0 +1,21 @@
+﻿@model IEnumerable<QL_WebsiteBanSach.Models.tbl_ChiTietSach>
+
+@{
+	ViewBag.Title = "Tìm Kiếm Sách";
+	Layout = "~/Views/Shared/Main_Layout_Page.cshtml";
+}
+
+<div class="container-fluid pt-5">
+	<div class="text-center mb-4">
+		<h2 class="section-title px-5"><span class="px-2">Tìm Được @ViewBag.Count Sách</span></h2>
+	</div>
+	<div class="row px-xl-5 pb-3">
+		@{
+			foreach (var item in Model)
+			{
+				if (item == null) { continue; }
+				@Html.Action("Book_Card_More", "Book", new { id = item.MaSach })
+			}
+		}
+	</div>
+</div>

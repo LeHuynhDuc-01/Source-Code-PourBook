@@ -1,0 +1,92 @@
+﻿<aside id="sidebar" class="sidebar">
+
+	<ul class="sidebar-nav" id="sidebar-nav">
+
+		<li class="nav-item">
+			<a class="nav-link " href="index.html">
+				<i class="bi bi-grid"></i>
+				<span>Mục Lục</span>
+			</a>
+		</li><!-- End Dashboard Nav -->
+		@*Danh mục*@
+		<li class="nav-item">
+			<a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+				<i class="bi bi-menu-button-wide"></i><span>Danh Mục</span><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+				<li>
+					<a href="@Url.Action("Manage_Books", "Admin")">
+						<i class="bi bi-circle"></i><span>Sách</span>
+					</a>
+				</li>
+				<li>
+					<a href="@Url.Action("Manage_Types", "Admin")">
+						<i class="bi bi-circle"></i><span>Thể Loại</span>
+					</a>
+				</li>
+				<li>
+					<a href="@Url.Action("Manage_Authors", "Admin")">
+						<i class="bi bi-circle"></i><span>Tác Giả</span>
+					</a>
+				</li>
+				<li>
+					<a href="@Url.Action("Manage_Publishers", "Admin")">
+						<i class="bi bi-circle"></i><span>Nhà Xuất Bản</span>
+					</a>
+				</li>
+				<li>
+					<a href="@Url.Action("Manage_Customers", "Admin")">
+						<i class="bi bi-circle"></i><span>Khách Hàng</span>
+					</a>
+				</li>
+				<li>
+					<a href="@Url.Action("Manage_Employees", "Admin")">
+						<i class="bi bi-circle"></i><span>Nhân Viên</span>
+					</a>
+				</li>
+			</ul>
+		</li><!-- End Components Nav -->
+		<li class="nav-item">
+			<a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+				<i class="bi bi-tools"></i><span>Công Cụ Khác</span><i class="bi bi-chevron-down ms-auto"></i>
+			</a>
+			<ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+				<li>
+					<a href="#">
+						<i class="bi bi-circle"></i><span>API</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<i class="bi bi-circle"></i><span>Apex</span>
+					</a>
+				</li>
+			</ul>
+		</li><!-- End Charts Nav -->
+		<li class="nav-heading">Link Nhanh</li>
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="@Url.Action("Index", "Home")">
+				<i class="bi bi-house"></i>
+				<span>Trang Chủ</span>
+			</a>
+		</li><!-- End Home Page Nav -->
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#">
+				<i class="bi bi-person"></i>
+				<span>Tài Khoản</span>
+			</a>
+		</li><!-- End Profile Page Nav -->
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#">
+				<i class="bi bi-box-arrow-in-right"></i>
+				<span>Đăng Nhập</span>
+			</a>
+		</li><!-- End Login Page Nav -->
+		<li class="nav-item">
+			<a class="nav-link collapsed" href="#">
+				<i class="bi bi-person-add"></i>
+				<span>Đăng Ký</span>
+			</a>
+		</li><!-- End Register Page Nav -->
+	</ul>
+</aside>
